@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi San Valentín?</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        background: linear-gradient(180deg, #ffdee9, #b5fffc);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        overflow-x: hidden;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.95);
+        border-radius: 25px;
+        padding: 25px 20px 35px;
+        width: 92%;
+        max-width: 420px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        position: relative;
+    }
+
+    h1 {
+        font-size: 2rem;
+        color: #ff4d6d;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: #444;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .icons {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+
+    .btns {
+        position: relative;
+        height: 140px;
+        margin-top: 10px;
+    }
+
+    button {
+        padding: 14px 30px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #yes {
+        background: #ff4d6d;
+        color: white;
+        box-shadow: 0 10px 20px rgba(255,77,109,0.4);
+    }
+
+    #yes:hover {
+        transform: scale(1.05);
+    }
+
+    #no {
+        position: absolute;
+        background: #eee;
+        color: #ff4d6d;
+        left: 180px;
+        top: 70px;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    }
+
+    #final {
+        display: none;
+        margin-top: 20px;
+        font-size: 1.4rem;
+        color: #ff4d6d;
+        animation: fade 1s ease forwards;
+    }
+
+    @keyframes fade {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    .heart {
+        position: fixed;
+        font-size: 18px;
+        animation: float 6s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateY(-10vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="icons">
+        🏛️ 🌸 🐢 🎀 ❤️ ⚔️ 🛡️
+    </div>
+
+    <h1>¿Quieres ser mi San Valentín?</h1>
+
+    <p>
+        Mi amor, contigo todo es más bonito.  
+        Eres mi lugar seguro, mi persona favorita y  
+        la mujer más hermosa del mundo.  
+        <br><br>
+        ¿Aceptas pasar este 14 de febrero conmigo  
+        y seguir construyendo nuestra historia?
+    </p>
+
+    <div class="btns">
+        <button id="yes">Sí 💖</button>
+        <button id="no">No 😢</button>
+    </div>
+
+    <div id="final">
+        💕 Gracias por ser mi San Valentín 💕<br>
+        Te amo con todo mi corazón ❤️
+    </div>
+</div>
+
+<!-- Música -->
+<audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    const no = document.getElementById("no");
+    const yes = document.getElementById("yes");
+    const finalMsg = document.getElementById("final");
+    const music = document.getElementById("music");
+
+    no.addEventListener("touchstart", moveNo);
+    no.addEventListener("mouseover", moveNo);
+
+    function moveNo() {
+        const x = Math.random() * 200;
+        const y = Math.random() * 90;
+        no.style.left = x + "px";
+        no.style.top = y + "px";
+    }
+
+    yes.addEventListener("click", () => {
+        finalMsg.style.display = "block";
+        music.play(); // iPhone permite esto porque hubo interacción
+        createHearts();
+    });
+
+    function createHearts() {
+        setInterval(() => {
+            const h = document.createElement("div");
+            h.className = "heart";
+            h.innerHTML = "❤️";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.fontSize = (12 + Math.random() * 20) + "px";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 6000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
